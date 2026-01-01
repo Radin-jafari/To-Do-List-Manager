@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Task Manager</title>
+
+    <!-- Modern font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-bg">
+        <div class="app-shell">
+            <header class="app-header">
+                <div class="logo-circle">TM</div>
+                <div class="header-text">
+                    <h1>My Task Manager</h1>
+                    <p class="subtitle">
+                        A calm space to organize what matters, one task at a time.
+                    </p>
+                </div>
+            </header>
+
+            <main class="app-main">
+                {% block content %}{% endblock %}
+            </main>
+
+            <footer class="app-footer">
+                <small>Built as a CS50 Final Project · {{ 2025 }}</small>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
