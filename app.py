@@ -2,8 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
 
-# This project was built with assistance from ChatGPT
-# (as allowed by the CS50 final project guidelines).
+
 
 app = Flask(__name__)
 DB_NAME = "tasks.db"
