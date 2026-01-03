@@ -131,38 +131,6 @@ def edit(task_id):
 
     return render_template("edit.html", task=task)
 
-@app.route("/init-db")
-def init_db_pg():
-    try:
-        # اگر متغیر محیطی ست نشده باشد، همین‌جا ارور می‌دهیم
-        if not DATABASE_URL:
-            raise Exception("DATABASE_URL is not set in environment")
-
-        conn = psycopg2.connect(DATABASE_URL)
-        cur = conn.cursor()
-
-        sql = """
-        CREATE TABLE IF NOT EXISTS tasks (
-            id SERIAL PRIMARY KEY,
-            title TEXT NOT NULL,
-            description TEXT,
-            category TEXT,
-            priority INTEGER DEFAULT 2,
-            due_date DATE,
-            done INTEGER NOT NULL DEFAULT 0,
-            created_at TIMESTAMP NOT NULL DEFAULT NOW()
-        );
-        """
-
-        cur.execute(sql)
-        conn.commit()
-        cur.close()
-        conn.close()
-        return "DB initialized"
-
-    except Exception as e:
-        # این‌جا خطا را واضح روی صفحه برمی‌گردانیم
-        return f"Error during init: {e}", 500
 
 if __name__ == "__main__":
     init_db()
