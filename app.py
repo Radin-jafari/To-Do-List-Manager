@@ -1,19 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
+import psycopg2
 import os
 
 
 
 app = Flask(__name__, static_folder="static", static_url_path="/static")
-DB_NAME = "tasks.db"
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    """Open a connection to the SQLite database."""
-    conn = sqlite3.connect(DB_NAME)
-    conn.row_factory = sqlite3.Row  # so we can do row["title"]
-    return conn
-
+    return psycopg2.connect(postgresql://data_base_leoooo_user:pTEZJhqnMZOIg0WLTkelIMEgweGPnYma@dpg-d5cf1o3uibrs73e9n510-a/data_base_leoooo)
 
 def init_db():
     """Create database and tables on first run using schema.sql."""
