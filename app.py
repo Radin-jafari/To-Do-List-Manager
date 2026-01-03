@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder="static", static_url_path="/static")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_db():
-    return psycopg2.connect(postgresql://data_base_leoooo_user:pTEZJhqnMZOIg0WLTkelIMEgweGPnYma@dpg-d5cf1o3uibrs73e9n510-a/data_base_leoooo)
+    return psycopg2.connect("DATABASE_URL")
 
 def init_db():
     """Create database and tables on first run using schema.sql."""
