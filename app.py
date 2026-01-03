@@ -135,3 +135,9 @@ def edit(task_id):
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)
+@app.route("/init-db")
+def init_db_pg():
+    with get_db() as conn, open("schema.sql", "r", encoding="utf-8") as f:
+        conn.cursor().execute(f.read())
+        conn.commit()
+    return "DB initialized"
