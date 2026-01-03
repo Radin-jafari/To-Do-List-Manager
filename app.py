@@ -133,9 +133,24 @@ def edit(task_id):
 
 @app.route("/init-db")
 def init_db_pg():
-    with get_db() as conn, open("schema.sql", "r", encoding="utf-8") as f:
-        conn.cursor().execute(f.read())
-        conn.commit()
+    sql = """
+    CREATE TABLE IF NOT EXISTS tasks (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        description TEXT,
+        category TEXT,
+        priority INTEGER DEFAULT 2,
+        due_date DATE,
+        done INTEGER NOT NULL DEFAULT 0,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
+    """
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+    cur.close()
+    conn.close()
     return "DB initialized"
 
 if __name__ == "__main__":
